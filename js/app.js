@@ -4,18 +4,18 @@ var minutesTxt = document.getElementById('minutes');
 var secondsTxt = document.getElementById('seconds');
 var txt = document.getElementById('summary');
 var period = document.getElementById('all');
-var name = "Имя";
-var lastMeeting = new Date(2016, 6, 6, 18, 20);
-var firstMeeting = new Date(2014, 11, 31);
+var name = "Олюша";
+var lastMeeting = new Date(2016, 8, 14, 20, 0);
+var firstMeeting = new Date(2014, 0, 29);
 
-function getMonthTitle(nmonth) {
+function getMonthTitle(nMonth) {
   var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'декабря'];
-  return months[nmonth];
+  return months[nMonth];
 }
 
 function calculatePeriod() {
 
-	daysTxt.textContent = getDays() + " " + getDayTitle(getDays()) + " прошло с того момента как в последний раз тебя видел";
+	daysTxt.textContent = getDays() + " " + getDayTitle(getDays()) + " прошел с того момента как в последний раз тебя видел";
 	hoursTxt.textContent = getHours() + " " + getHourTitle(getHours()) +" я думаю о тебе с той встречи";
 	minutesTxt.textContent = getMinutes() + " " + getMinuteTitle(getMinutes()) +" пролетело с " + lastMeeting.getDate() + " " + getMonthTitle(lastMeeting.getMonth()) + " и как я тоскую за тобой";
 	secondsTxt.textContent = getSeconds() + " " + getSecondTitle(getSeconds()) +" скучаю за тобой после последней встречи";
@@ -26,6 +26,14 @@ function calculatePeriod() {
 	
 }
 
+function anchorHref(){
+    var anchor=$(this);
+    $("html, body").animate({
+        scrollTop: $(anchor.attr("href")).offset().top
+    }, 1500);
+}
+
 setStartDate(lastMeeting);
 calculatePeriod();
 setInterval(calculatePeriod, 1000);
+$("a[href*='#']").click(anchorHref);
